@@ -1,40 +1,48 @@
 ---
-import "../styles/global.css"
+// src/components/NavBar.astro
+import "../styles/global.css";
+let isOpen = false;
 ---
+
+<script is:inline>
+  function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    if (menu) {
+      menu.classList.toggle('hidden');
+    }
+  }
+
+  // Asegura que toggleMenu esté disponible globalmente
+  window.toggleMenu = toggleMenu;
+</script>
+
 
 <nav class="bg-black text-white sticky top-0 z-50">
   <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
     <!-- Logo -->
-    <a href="">
+    <a href="/">
       <img src="/logo.png" alt="Logo" class="h-10" />
     </a>
 
-    <ul class="flex space-x-6  font-semibold">
-      <li>
-        <a href="#mision" class="relative group">
-          <span class="hover:text-green-400 transition">Misión</span>
-          <span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-green-400 transition-all group-hover:w-full"></span>
-        </a>
-      </li>
-      <li>
-        <a href="#servicios" class="relative group">
-          <span class="hover:text-green-400 transition">Servicios</span>
-          <span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-green-400 transition-all group-hover:w-full"></span>
-        </a>
-      </li>
-      <li>
-        <a href="#nosotros" class="relative group">
-          <span class="hover:text-green-400 transition">Nosotros</span>
-          <span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-green-400 transition-all group-hover:w-full"></span>
-        </a>
-      </li>
-      <li>
-        <a href="#contacto" class="relative group">
-          <span class="hover:text-green-400 transition">Contacto</span>
-          <span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-green-400 transition-all group-hover:w-full"></span>
-        </a>
-      </li>
-    </ul>
+    <!-- Botón menú hamburguesa (solo visible en móvil) -->
+    <button class="md:hidden" onclick="window.toggleMenu()">
+      <img src="/menu.png" alt="Menu" class="h-8 w-8" />
+    </button>
 
+    <!-- Menú desktop -->
+    <ul class="hidden md:flex space-x-6 font-semibold">
+      <li><a href="#mision" class="relative group"><span class="hover:text-green-400 transition">Misión</span><span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-green-400 transition-all group-hover:w-full"></span></a></li>
+      <li><a href="#servicios" class="relative group"><span class="hover:text-green-400 transition">Servicios</span><span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-green-400 transition-all group-hover:w-full"></span></a></li>
+      <li><a href="#nosotros" class="relative group"><span class="hover:text-green-400 transition">Nosotros</span><span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-green-400 transition-all group-hover:w-full"></span></a></li>
+      <li><a href="#contacto" class="relative group"><span class="hover:text-green-400 transition">Contacto</span><span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-green-400 transition-all group-hover:w-full"></span></a></li>
+    </ul>
+  </div>
+
+  <!-- Menú móvil -->
+  <div id="mobileMenu" class="md:hidden hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-95 flex flex-col items-center justify-center space-y-8 text-2xl font-semibold z-40">
+    <a href="#mision" onclick="window.toggleMenu()">Misión</a>
+    <a href="#servicios" onclick="window.toggleMenu()">Servicios</a>
+    <a href="#nosotros" onclick="window.toggleMenu()">Nosotros</a>
+    <a href="#contacto" onclick="window.toggleMenu()">Contacto</a>
   </div>
 </nav>
